@@ -231,7 +231,7 @@
     </div>
     <div>
       <div class="text-lg font-black grad-text">起灵贴吧</div>
-      <div class="text-[10px] text-gray-400">v1.0.0 · 情绪树洞</div>
+      <div class="text-[10px] text-gray-400"><span data-latest-version></span> · 情绪树洞</div>
     </div>
   </div>
 
@@ -293,7 +293,7 @@
 
       <div class="flex flex-wrap gap-4">
         <a href="#download" class="btn-primary px-8 py-4 rounded-2xl font-bold flex items-center gap-2">
-          <i class="fa fa-download"></i> 下载 起灵贴吧.zip
+          <i class="fa fa-download"></i> <span data-latest-file>下载源码</span>
         </a>
         <a href="#features" class="btn-ghost px-8 py-4 rounded-2xl font-semibold flex items-center gap-2">
           <i class="fa fa-play-circle"></i> 探索功能
@@ -755,52 +755,8 @@
         <p class="text-gray-500 mt-3">持续迭代，不断优化用户体验</p>
       </div>
 
-      <div class="space-y-4">
-        <div class="glass-strong rounded-2xl p-6 card-float">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="px-3 py-1 rounded-full bg-pink-100 text-pink-600 text-xs font-bold">v1.0.0</span>
-            <span class="text-sm text-gray-400">2026-10-03</span>
-          </div>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li class="flex items-start gap-2">
-              <i class="fa fa-check-circle text-green-500 mt-0.5"></i>
-              <span>初始版本发布，包含完整的贴吧、帖子、用户、评论系统</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="fa fa-check-circle text-green-500 mt-0.5"></i>
-              <span>实现联系站长会话系统，支持多轮对话</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="fa fa-check-circle text-green-500 mt-0.5"></i>
-              <span>后台管理面板，支持数据看板与内容管理</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="fa fa-check-circle text-green-500 mt-0.5"></i>
-              <span>唯美治愈系 UI 设计，毛玻璃效果与动态背景</span>
-            </li>
-          </ul>
-        </div>
-        <div class="glass-strong rounded-2xl p-6 card-float">
-          <div class="flex items-center gap-3 mb-3">
-            <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-600 text-xs font-bold">Coming Soon</span>
-            <span class="text-sm text-gray-400">计划中</span>
-          </div>
-          <ul class="text-sm text-gray-600 space-y-2">
-            <li class="flex items-start gap-2">
-              <i class="fa fa-clock-o text-amber-500 mt-0.5"></i>
-              <span>私信系统升级，支持实时聊天</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="fa fa-clock-o text-amber-500 mt-0.5"></i>
-              <span>主题皮肤切换，支持深色模式</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <i class="fa fa-clock-o text-amber-500 mt-0.5"></i>
-              <span>插件系统，支持第三方扩展</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <!-- 更新日志列表由 JS 根据 changelogData 动态渲染 -->
+      <div id="changelog-list" class="space-y-4"></div>
     </div>
   </section>
 
@@ -909,14 +865,14 @@
           <h2 class="text-3xl md:text-4xl font-black text-gray-800 mb-4">立即下载 起灵贴吧</h2>
           <p class="text-gray-500 mb-8">开源免费 · 开箱即用 · 持续更新</p>
 
-          <a href="起灵贴吧.zip" download class="btn-primary inline-flex items-center gap-3 px-10 py-4 rounded-2xl text-lg font-bold">
-            <i class="fa fa-download"></i> 下载 起灵贴吧.zip
+          <a data-download-link download class="btn-primary inline-flex items-center gap-3 px-10 py-4 rounded-2xl text-lg font-bold cursor-pointer">
+            <i class="fa fa-download"></i> <span data-latest-file>下载源码</span>
           </a>
 
           <div class="flex items-center justify-center gap-6 mt-8 text-gray-400 text-sm">
             <div class="flex items-center gap-2"><i class="fa fa-file-archive-o"></i> ZIP 格式</div>
-            <div class="flex items-center gap-2"><i class="fa fa-code-branch"></i> v1.0.0</div>
-            <div class="flex items-center gap-2"><i class="fa fa-calendar"></i> 2026-10-03</div>
+            <div class="flex items-center gap-2"><i class="fa fa-code-branch"></i> <span data-latest-version></span></div>
+            <div class="flex items-center gap-2"><i class="fa fa-calendar"></i> <span data-latest-date></span></div>
           </div>
         </div>
       </div>
@@ -945,6 +901,84 @@
 </main>
 
 <script>
+  /* ========== 更新日志数据（新增版本时在数组开头追加即可，file 为对应压缩包名） ========== */
+  const changelogData = [
+    {
+      version: 'v7.0.0',
+      date: '2026-10-30',
+      file: '起灵贴吧7.0.zip',
+      badgeClass: 'bg-pink-100 text-pink-600',
+      items: [
+        { done: true, text: '贴吧圈子系统：创建专属圈子、封面图标上传、吧主管理' },
+        { done: true, text: '图文/视频/投票多形式发帖，多图上传实时预览' },
+        { done: true, text: '评论、点赞、收藏、关注与多级回复，实时消息通知' },
+        { done: true, text: '联系站长会话系统，支持多轮对话与用户名查询回复' },
+        { done: true, text: '隐私设置：帖子/关注/粉丝/贴吧可见性独立配置' },
+        { done: true, text: '后台管理：数据看板与用户/帖子/贴吧/评论/分类管理' }
+      ]
+    },
+    {
+      version: 'v6.0.0',
+      date: '2026-10-03',
+      file: '起灵贴吧6.0.zip',
+      badgeClass: 'bg-purple-100 text-purple-600',
+      items: [
+        { done: true, text: '初始版本发布，包含完整的贴吧、帖子、用户、评论系统' },
+        { done: true, text: '实现联系站长会话系统，支持多轮对话' },
+        { done: true, text: '后台管理面板，支持数据看板与内容管理' },
+        { done: true, text: '唯美治愈系 UI 设计，毛玻璃效果与动态背景' }
+      ]
+    },
+    {
+      version: 'Coming Soon',
+      date: '计划中',
+      badgeClass: 'bg-purple-100 text-purple-600',
+      items: [
+        { done: false, text: '私信系统升级，支持实时聊天' },
+        { done: false, text: '主题皮肤切换，支持深色模式' },
+        { done: false, text: '插件系统，支持第三方扩展' }
+      ]
+    }
+  ];
+
+  /* ========== 最新版本 = 数组中第一个带压缩包的记录 ========== */
+  const latestRelease = changelogData.find(log => log.file) || {};
+
+  /* ========== 渲染更新日志 ========== */
+  function renderChangelog() {
+    const list = document.getElementById('changelog-list');
+    if (!list) return;
+    list.innerHTML = changelogData.map(log => `
+      <div class="glass-strong rounded-2xl p-6 card-float">
+        <div class="flex items-center flex-wrap gap-3 mb-3">
+          <span class="px-3 py-1 rounded-full ${log.badgeClass} text-xs font-bold">${log.version}</span>
+          <span class="text-sm text-gray-400">${log.date}</span>
+          ${log === latestRelease ? '<span class="px-2 py-0.5 rounded-full bg-green-100 text-green-600 text-[10px] font-bold">最新版</span>' : ''}
+          ${log.file ? `<a href="${encodeURI(log.file)}" download class="ml-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 text-white text-xs font-semibold hover:opacity-90 transition"><i class="fa fa-download"></i> 下载此版本</a>` : ''}
+        </div>
+        <ul class="text-sm text-gray-600 space-y-2">
+          ${log.items.map(item => `
+            <li class="flex items-start gap-2">
+              <i class="fa ${item.done ? 'fa-check-circle text-green-500' : 'fa-clock-o text-amber-500'} mt-0.5"></i>
+              <span>${item.text}</span>
+            </li>`).join('')}
+        </ul>
+      </div>`).join('');
+  }
+  renderChangelog();
+
+  /* ========== 将页面中的版本号/文件名/下载链接同步为最新版 ========== */
+  function syncLatestRelease() {
+    if (!latestRelease.file) return;
+    const fileUrl = encodeURI(latestRelease.file);
+    document.querySelectorAll('[data-download-link]').forEach(a => { a.href = fileUrl; });
+    document.querySelectorAll('[data-latest-file]').forEach(el => { el.textContent = `下载 ${latestRelease.file}`; });
+    document.querySelectorAll('[data-latest-version]').forEach(el => { el.textContent = latestRelease.version; });
+    document.querySelectorAll('[data-latest-date]').forEach(el => { el.textContent = latestRelease.date; });
+  }
+  syncLatestRelease();
+
+  /* ========== 侧边栏滚动高亮 ========== */
   const sections = document.querySelectorAll('section[id]');
   const navItems = document.querySelectorAll('.nav-item');
   window.addEventListener('scroll', () => {
